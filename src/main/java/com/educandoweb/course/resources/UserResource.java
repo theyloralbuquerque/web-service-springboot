@@ -17,5 +17,4 @@ public class UserResource {
 		return  ResponseEntity.ok().body(u); // Define como retorno do método um tipo o corpo (body) de u, que é um tipo ResponseEntity. 
 	
 	}
-
 }

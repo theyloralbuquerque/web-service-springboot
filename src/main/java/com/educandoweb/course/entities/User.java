@@ -3,9 +3,19 @@ package com.educandoweb.course.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity // Define a classe Usar como uma Entidade (tabela) no BD.
+@Table(name = "tb_user") // Define o nome da tabela para tb_user.
 public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@Id // Define o atributo id como PK da tabela.
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // Define a PK como autoincrementável;
 	private Long id;
 	private String name;
 	private String email;
