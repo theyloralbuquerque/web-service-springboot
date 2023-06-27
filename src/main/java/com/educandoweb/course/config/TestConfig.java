@@ -60,6 +60,14 @@ public class TestConfig implements CommandLineRunner { // CommandLineRunner perm
 		userRepository.saveAll(Arrays.asList(u1, u2)); // saveAll() chamado a partir de um Repository salva objetos no BD.
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
 		
+		p1.getCategories().add(cat2); // O produto p1 pega o atributo categories (que é uma coleção) e associa o objeto (cat2) à ele.
+		p2.getCategories().add(cat1);
+		p2.getCategories().add(cat3);
+		p3.getCategories().add(cat3);
+		p4.getCategories().add(cat3);
+		p5.getCategories().add(cat2);
+
+		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 	}
 
 }
