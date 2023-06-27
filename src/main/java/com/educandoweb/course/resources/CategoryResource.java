@@ -24,13 +24,13 @@ public class CategoryResource { // Controlador
 		List<Category> list = service.findAll(); // Chama o método findAll() da classe CategoryService.
 		
 		return ResponseEntity.ok().body(list); // Define como retorno do método o corpo (body) da list, que é um tipo ResponseEntity. 
-	
 	}
 	
 	@GetMapping(value = "/{id}") // Indica que o método findById() responde a requisição do tipo get do HTTP.
 	public ResponseEntity<Category> findById(@PathVariable Long id) {
-	Category obj = service.findById(id); // Chama o método findAById() da classe CategoryService.
-	return ResponseEntity.ok().body(obj); // Define como retorno do método o corpo (body) do obj, que é um tipo ResponseEntity. 
+		Category obj = service.findById(id); // Chama o método findAById() da classe CategoryService.
+		
+		return ResponseEntity.ok().body(obj); // Define como retorno do método o corpo (body) do obj, que é um tipo ResponseEntity. 
 	}
 
 }

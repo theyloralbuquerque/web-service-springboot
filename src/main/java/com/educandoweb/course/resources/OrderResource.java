@@ -24,13 +24,13 @@ public class OrderResource { // Controlador
 		List<Order> list = service.findAll(); // Chama o método findAll() da classe OrderService.
 		
 		return ResponseEntity.ok().body(list); // Define como retorno do método o corpo (body) da list, que é um tipo ResponseEntity. 
-	
 	}
 	
 	@GetMapping(value = "/{id}") // Indica que o método findById() responde a requisição do tipo get do HTTP.
 	public ResponseEntity<Order> findById(@PathVariable Long id) {
-	Order obj = service.findById(id); // Chama o método findAById() da classe OrderService.
-	return ResponseEntity.ok().body(obj); // Define como retorno do método o corpo (body) do obj, que é um tipo ResponseEntity. 
+		Order obj = service.findById(id); // Chama o método findAById() da classe OrderService.
+		
+		return ResponseEntity.ok().body(obj); // Define como retorno do método o corpo (body) do obj, que é um tipo ResponseEntity. 
 	}
 
 }
