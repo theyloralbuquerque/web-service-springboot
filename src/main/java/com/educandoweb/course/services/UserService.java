@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.repositories.UserRepository;
+import com.educandoweb.course.services.exceptions.ResourceNotFoundException;
 
 @Service // Registra a classe UserService no mecanismo de injeção de dependência do spring.
 public class UserService {
@@ -23,7 +24,7 @@ public class UserService {
 	// Método que busca um usuário por id.
 	public User findById(Long id) { 
 		Optional<User> obj = repository.findById(id); // .findById(id) chamado a partir de um objeto JpaRepository recupera no BD o id recebido como parâmetro e retorna em formato de Optional.
-		return obj.get(); // get() do Optional vai pegar um objeto que estiver dentro do obj, que é um objeto Optional.
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id)); // orElseThrow() vai tentar o get(), se não tiver User no obj, ele lança a exceção dentro dos parênteses.
 	}
 
 	// Método responsável por inserir um usuário no BD.

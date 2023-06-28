@@ -38,20 +38,20 @@ public class UserResource { // Controlador
 		return ResponseEntity.ok().body(obj); // Define como retorno do método o corpo (body) do obj, que é um tipo ResponseEntity. 
 	}
 
-	@PostMapping
+	@PostMapping  // @PostMapping requisição que insere um elemento do BD.
 	public ResponseEntity<User> insert(@RequestBody User obj){ // @RequestBody informa ao spring que o corpo da solicitação deve ser desserializado e vinculado ao parâmetro anotado.
 		obj = service.insert(obj); // Chama o método insert na classe UserService passando como parâmetro o obj.
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).body(obj); // Define como retorno do método a criação de umUser e o corpo (body) do obj, que é um tipo ResponseEntity. 
 	}
 	
-	@DeleteMapping(value = "/{id}")
+	@DeleteMapping(value = "/{id}") // @DeleteMapping requisição que deleta um elemento do BD.
 	public ResponseEntity<Void> delete(@PathVariable Long id){ // @PathVariable serve para que o Long id seja reconhecido como uma variável da minha URL.
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PutMapping(value = "/{id}")
+	@PutMapping(value = "/{id}")  // @PutMapping requisição que atualiza um elemento do BD.
 	// @RequestBody informa ao framework que o corpo da solicitação deve ser desserializado e vinculado ao parâmetro anotado.
 	public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User obj) { 
 		obj = service.update(id, obj);
