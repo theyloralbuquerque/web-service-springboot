@@ -97,6 +97,14 @@ public class Order implements Serializable {
 		this.payment = payment;
 	}
 	
+	public Double getTotal() { // Método que retorna o valor total do pedido, ou seja, a soma de todos os subtotais do pedido.
+		double sum = 0.0;
+		for (OrderItem x : items) {
+			sum += x.getSubTotal(); 
+		}
+		return sum;
+	}
+	
 
 	@Override
 	public int hashCode() {
