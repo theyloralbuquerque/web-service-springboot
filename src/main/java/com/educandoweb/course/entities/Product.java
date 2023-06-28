@@ -92,7 +92,7 @@ public class Product implements Serializable{
 		return categories;
 	}
 	
-	@JsonIgnore
+	@JsonIgnore // Irá ignorar a chamada de um novo Order (pedido) ao ser chamado, para que não entre em loop infinito.
 	public Set<Order> getOrders() {
 		Set<Order> set = new HashSet<>(); 
 		for (OrderItem x : items) {
