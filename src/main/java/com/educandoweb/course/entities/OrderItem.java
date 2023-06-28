@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import com.educandoweb.course.entities.pk.OrderItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -15,7 +16,7 @@ public class OrderItem implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId // Indica que a classe OrderItemPK é usada como chave primária incorporada.
-	private OrderItemPK id;
+	private OrderItemPK id = new OrderItemPK(); // Sempre tem que instanciar objetos que sejam de uma classe auxiliar que seja um id composto.
 	
 	private Integer quantity;
 	private Double price;
@@ -47,6 +48,7 @@ public class OrderItem implements Serializable{
 		this.price = price;
 	}
 
+	@JsonIgnore // Irá ignorar a chamada de um novo Order (pedido) ao ser chamado, para que não entre em loop infinito.
 	public Order getOrder() {
 		return id.getOrder();
 	}
