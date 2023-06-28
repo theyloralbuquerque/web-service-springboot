@@ -30,4 +30,10 @@ public class UserService {
 	public User insert(User obj) {
 		return repository.save(obj);
 	}
+	
+	// Método que deleta um User do BD.
+	public void delete(Long id) {
+		repository.deleteById(id); // O método deleteById() do repository deleta um elemento do BD pelo id passado como parâmetro.
+	}
+
 }

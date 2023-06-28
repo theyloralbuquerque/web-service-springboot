@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,4 +44,9 @@ public class UserResource { // Controlador
 		return ResponseEntity.created(uri).body(obj); // Define como retorno do método a criação de umUser e o corpo (body) do obj, que é um tipo ResponseEntity. 
 	}
 	
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<Void> delete(@PathVariable Long id){ // @PathVariable serve para que o Long id seja reconhecido como uma variável da minha URL
+		service.delete(id);
+		return ResponseEntity.noContent().build();
+	}
 }
