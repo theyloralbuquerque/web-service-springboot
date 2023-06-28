@@ -35,5 +35,19 @@ public class UserService {
 	public void delete(Long id) {
 		repository.deleteById(id); // O método deleteById() do repository deleta um elemento do BD pelo id passado como parâmetro.
 	}
+	
+	public User update(Long id, User obj) {
+		User entity = repository.getReferenceById(id); // getReferenceById(id) pega a referência do id do objeto, mas não vai no BD ainda.
+		updateData(entity, obj);
+		return repository.save(entity); // Retorna a entidade salva no repositório.
+	}
+
+	// Método que atualiza os dados do entity com base nos dados armazenados em obj.
+	private void updateData(User entity, User obj) {
+		entity.setName(obj.getName());   // Atualização do entity passando como parâmetro os atributos contidos no obj.
+		entity.setEmail(obj.getEmail()); // Dessa forma o entity irá receber o name, email e phone contidos no obj.
+		entity.setPhone(obj.getPhone());
+	}
+
 
 }
