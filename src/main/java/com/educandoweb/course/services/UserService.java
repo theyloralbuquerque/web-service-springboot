@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.repositories.UserRepository;
+import com.educandoweb.course.services.exceptions.DatabaseException;
 import com.educandoweb.course.services.exceptions.ResourceNotFoundException;
 
 @Service // Registra a classe UserService no mecanismo de injeção de dependência do spring.
@@ -34,7 +37,15 @@ public class UserService {
 	
 	// Método que deleta um User do BD.
 	public void delete(Long id) {
-		repository.deleteById(id); // O método deleteById() do repository deleta um elemento do BD pelo id passado como parâmetro.
+		try {
+			repository.deleteById(id); // O método deleteById() do repository deleta um elemento do BD pelo id passado como parâmetro.
+		}
+		catch (EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException(id);
+		}
+		catch (DataIntegrityViolationException e) {
+			throw new DatabaseException(e.getMessage());
+		}
 	}
 	
 	public User update(Long id, User obj) {
