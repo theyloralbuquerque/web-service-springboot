@@ -13,6 +13,8 @@ import com.educandoweb.course.repositories.UserRepository;
 import com.educandoweb.course.services.exceptions.DatabaseException;
 import com.educandoweb.course.services.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service // Registra a classe UserService no mecanismo de injeção de dependência do spring.
 public class UserService {
 	
@@ -49,9 +51,15 @@ public class UserService {
 	}
 	
 	public User update(Long id, User obj) {
-		User entity = repository.getReferenceById(id); // getReferenceById(id) pega a referência do id do objeto, mas não vai no BD ainda.
-		updateData(entity, obj);
-		return repository.save(entity); // Retorna a entidade salva no repositório.
+		try {
+			User entity = repository.getReferenceById(id); // getReferenceById(id) pega a referência do id do objeto, mas não vai no BD ainda.
+			updateData(entity, obj);
+			return repository.save(entity); // Retorna a entidade salva no repositório.
+		}
+		catch (EntityNotFoundException e) {
+			e.printStackTrace();
+			throw new ResourceNotFoundException(id);
+		}
 	}
 
 	// Método que atualiza os dados do entity com base nos dados armazenados em obj.
