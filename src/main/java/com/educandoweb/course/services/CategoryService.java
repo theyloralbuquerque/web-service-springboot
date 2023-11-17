@@ -15,7 +15,6 @@ public class CategoryService {
 	@Autowired
 	private CategoryRepository repository;
 	
-	
 	// Vai chamar o método findAll() (do JpaRepository) do repository e retornar uma Lista de Category.
 	public List<Category> findAll() { 
 		return repository.findAll(); // .findAll() chamado a partir de um objeto JpaRepository recupera todas as entidades no BD e retorna em formato de Lista.

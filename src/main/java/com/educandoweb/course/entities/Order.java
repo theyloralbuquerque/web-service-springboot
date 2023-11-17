@@ -29,10 +29,9 @@ public class Order implements Serializable {
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant moment;
-	
 	private Integer orderStatus;
 	
-	@ManyToOne // muitos-para-um.
+	@ManyToOne // muitos-para-um. Vários Order (pedidos) relacionados a somente um cliente.
 	@JoinColumn(name = "client_id") // Define a coluna client_id como FK na tabela Order.
 	private User client;
 	
@@ -92,7 +91,6 @@ public class Order implements Serializable {
 		return payment;
 	}
 	
-
 	public void setPayment(Payment payment) {
 		this.payment = payment;
 	}
@@ -104,7 +102,6 @@ public class Order implements Serializable {
 		}
 		return sum;
 	}
-	
 
 	@Override
 	public int hashCode() {

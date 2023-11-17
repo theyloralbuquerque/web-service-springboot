@@ -18,7 +18,8 @@ public enum OrderStatus {
 		return code;
 	}
 	
-	public static OrderStatus valueOf(int code) { // Método que converte um valor numérico para um valor do tipo enumerado.
+	// Método que converte um valor numérico para um valor do tipo enumerado.
+	public static OrderStatus valueOf(int code) {
 		for (OrderStatus value : OrderStatus.values()) { // Para cada valor do tipo OrderStatus da coleção OrderStatus.values().
 			if (value.getCode() == code) { // Se o valor do enum for igual ao code recebido como parâmetro.
 				return value; // Retorne o valor.

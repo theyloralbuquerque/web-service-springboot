@@ -48,7 +48,7 @@ public class OrderItem implements Serializable{
 		this.price = price;
 	}
 
-	@JsonIgnore
+	@JsonIgnore // Corta a associação de mão dupla com a entidade Order. Esse método é que chama o pedido (Order) assocido ao OrderItem.
 	public Order getOrder() {
 		return id.getOrder();
 	}
